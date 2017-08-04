@@ -4,13 +4,12 @@
 
 module.exports = {
   /**
-   * The union of the two sets (all elements in both sets, no duplicates). (not inplace)
-   * @param {Set} set1 First set of anything.
-   * @param {Set} set2 Second set...
+   * The union of the specified sets (all elements in all sets, no duplicates). (not inplace)
+   * @param {Set[]} sets The sets.
    * @returns {Set} The union set (does not change any of the input sets) which contains all elements that are in at least one of the input sets.
    */
-  union: function (set1, set2) {
-    return new Set([...set1, ...set2])
+  union: function (...sets) {
+    return new Set(Array.prototype.reduce.call(sets, (set, current) => [ ...set, ...current ], []))
   },
 
   /**
@@ -24,12 +23,12 @@ module.exports = {
   },
 
   /**
-   * The intersection of the two sets. (not inplace)
-   * @param {Set} set1 One of the sets..
-   * @param {Set} set2 And the other set.
-   * @returns {Set} The intersection of both sets. I.e. every element that is in both sets.
+   * The intersection of the specified sets. (not inplace)
+   * @param {Set[]} sets The sets.
+   * @returns {Set} The intersection of the specified sets. I.e. every element that is in all sets.
    */
-  intersection: function (set1, set2) {
-    return new Set([...set1].filter(x => set2.has(x)));
+  intersection: function (...sets) {
+    const [set1, ...otherSets] = sets
+    return new Set([...set1].filter(x => otherSets.every((set) => set.has(x))))
   }
 }
