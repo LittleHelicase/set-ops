@@ -5,11 +5,14 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "echo \"No tests specified, shame on me...\""
+    "test": "ava"
   },
   "keywords": [
     "Sets"
   ],
   "author": "Maximilian Klein",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.21.0"
+  }
 }
